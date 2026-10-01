@@ -1,7 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wurstfest Countdown</title>
+
+<style>
+
+html, body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+}
+
+body{
+    background:url('WFCountdown.jpg') center center no-repeat;
+    background-size:cover;
+    overflow:hidden;
+    font-family:Georgia, serif;
+}
+
+#countdown{
+    position:absolute;
+
+    /* Move up/down */
+    top:69%;
+
+    /* Center horizontally */
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:100%;
+
+    text-align:center;
+
+    color:#e7c17c;
+
+    font-size:4.2vw;
+
+    font-weight:bold;
+
+    letter-spacing:.12em;
+
+    text-shadow:
+        2px 2px 6px rgba(0,0,0,.9);
+}
+
+</style>
+
+</head>
+
 <body>
 
 <div id="countdown">
-    Loading...
+Loading...
 </div>
 
 <script>
@@ -13,20 +67,20 @@ function updateCountdown() {
     const now = new Date();
     let diff = targetDate - now;
 
-    if(diff <= 0) {
+    if(diff <= 0){
         document.getElementById("countdown").innerHTML =
-            "WURSTFEST HAS ARRIVED!";
+        "WURSTFEST HAS ARRIVED!";
         return;
     }
 
-    const daysTotal =
+    const totalDays =
         Math.floor(diff / (1000 * 60 * 60 * 24));
 
     const months =
-        Math.floor(daysTotal / 30);
+        Math.floor(totalDays / 30);
 
     const days =
-        daysTotal % 30;
+        totalDays % 30;
 
     const hours =
         Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -50,8 +104,9 @@ function updateCountdown() {
 }
 
 updateCountdown();
-setInterval(updateCountdown, 1000);
+setInterval(updateCountdown,1000);
 
 </script>
 
 </body>
+</html>
