@@ -8,8 +8,9 @@
 
 body{
     margin:0;
-    background:url('WFCountdown.jpg') center center;
+    background:url('WFCountdown.jpg') center center no-repeat;
     background-size:cover;
+    background-attachment:fixed;
     height:100vh;
     display:flex;
     justify-content:center;
@@ -20,31 +21,38 @@ body{
 
 .overlay{
     text-align:center;
-    background:rgba(0,0,0,.50);
+    background:rgba(0,0,0,.25);
     padding:30px 50px;
     border-radius:15px;
+    backdrop-filter: blur(3px);
 }
 
 h1{
     font-size:4rem;
     margin-bottom:20px;
+    text-shadow:2px 2px 8px rgba(0,0,0,.8);
 }
 
 #countdown{
     font-size:3rem;
+    font-weight:bold;
+    text-shadow:2px 2px 8px rgba(0,0,0,.8);
 }
 
 .date{
     margin-top:20px;
     font-size:1.5rem;
+    text-shadow:2px 2px 8px rgba(0,0,0,.8);
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="overlay">
+
     <h1>WURSTFEST IS COMING</h1>
 
     <div id="countdown"></div>
@@ -52,6 +60,7 @@ h1{
     <div class="date">
         November 13, 2026 • 6:00 PM
     </div>
+
 </div>
 
 <script>
@@ -62,7 +71,7 @@ function updateCountdown(){
 
     const now = new Date();
 
-    let diff = target - now;
+    const diff = target - now;
 
     if(diff < 0){
         document.getElementById("countdown").innerHTML =
@@ -70,27 +79,19 @@ function updateCountdown(){
         return;
     }
 
-    const days =
-        Math.floor(diff / (1000*60*60*24));
-
-    const hours =
-        Math.floor((diff/(1000*60*60)) % 24);
-
-    const minutes =
-        Math.floor((diff/(1000*60)) % 60);
-
-    const seconds =
-        Math.floor((diff/1000) % 60);
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
 
     document.getElementById("countdown").innerHTML =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        days + "d " +
+        hours + "h " +
+        minutes + "m " +
+        seconds + "s";
 }
 
+updateCountdown();
 setInterval(updateCountdown,1000);
 
-updateCountdown();
-
-</script>
-
-</body>
-</html>
+</script
