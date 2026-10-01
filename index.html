@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Wurstfest Countdown</title>
+
+<style>
+
+body{
+    margin:0;
+    background:url('wurstfest.jpg') center center;
+    background-size:cover;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-family:Georgia, serif;
+}
+
+.overlay{
+    text-align:center;
+    background:rgba(0,0,0,.50);
+    padding:30px 50px;
+    border-radius:15px;
+}
+
+h1{
+    font-size:4rem;
+    margin-bottom:20px;
+}
+
+#countdown{
+    font-size:3rem;
+}
+
+.date{
+    margin-top:20px;
+    font-size:1.5rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+    <h1>WURSTFEST IS COMING</h1>
+
+    <div id="countdown"></div>
+
+    <div class="date">
+        November 13, 2026 • 6:00 PM
+    </div>
+</div>
+
+<script>
+
+const target = new Date('2026-11-13T18:00:00-06:00');
+
+function updateCountdown(){
+
+    const now = new Date();
+
+    let diff = target - now;
+
+    if(diff < 0){
+        document.getElementById("countdown").innerHTML =
+        "WURSTFEST HAS ARRIVED!";
+        return;
+    }
+
+    const days =
+        Math.floor(diff / (1000*60*60*24));
+
+    const hours =
+        Math.floor((diff/(1000*60*60)) % 24);
+
+    const minutes =
+        Math.floor((diff/(1000*60)) % 60);
+
+    const seconds =
+        Math.floor((diff/1000) % 60);
+
+    document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+setInterval(updateCountdown,1000);
+
+updateCountdown();
+
+</script>
+
+</body>
+</html>
